@@ -203,4 +203,30 @@
   renderToday();
   tasks = load();
   render();
+
+  // 数据保存限制提示：file:// 打开或 localStorage 不可用时，明确告诉用户
+  (function () {
+    var protocol = location.protocol;
+    var storageWorks = true;
+    try {
+      localStorage.setItem("__todo_probe__", "1");
+      localStorage.removeItem("__todo_probe__");
+    } catch (err) {
+      storageWorks = false;
+    }
+
+    if (protocol === "file:" || !storageWorks) {
+      var msg = !storageWorks
+        ? "当前浏览器无法保存数据，任务在刷新后可能丢失（可能是隐私模式或浏览器限制）。"
+        : "现在是用 file:// 打开的：数据只存在这台电脑、这个浏览器里，换成部署后的 http 链接打开不会看到这些任务。建议用正式链接。";
+
+      var app = document.querySelector(".app");
+      var bar = document.createElement("p");
+      bar.style.cssText =
+        "margin:0 0 16px;padding:10px 14px;border-radius:10px;" +
+        "background:#fdf3d8;color:#8a6d1a;font-size:13px;line-height:1.5;";
+      bar.textContent = msg;
+      app.insertBefore(bar, app.firstChild);
+    }
+  })();
 })();
