@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="每日待办清单：添加、勾选完成、删除，数据保存在浏览器本地">
+  <title>每日待办清单</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1>每日待办</h1>
+      <p class="today" id="today"></p>
+    </header>
+
+    <form class="add-form" id="add-form">
+      <label class="sr-only" for="task-input">添加任务</label>
+      <input
+        id="task-input"
+        type="text"
+        maxlength="120"
+        placeholder="今天要做什么？"
+        autocomplete="off"
+      />
+      <button type="submit" id="add-btn">添加</button>
+    </form>
+
+    <p class="form-hint" id="form-hint" hidden>请输入任务内容</p>
+
+    <ul class="task-list" id="task-list"></ul>
+    <p class="empty" id="empty" hidden>还没有任务，先加一条吧。</p>
+
+    <footer class="app-footer">
+      <span id="stats">还剩 0 项</span>
+      <span class="hint">数据只保存在这台电脑的浏览器里</span>
+    </footer>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
